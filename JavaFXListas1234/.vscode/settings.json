@@ -1,0 +1,9 @@
+{
+    "java.project.referencedLibraries": {
+        "include": [
+            "lib/**/*.jar",
+            "C:\\Program Files\\Java\\javafx-sdk-21.0.6\\lib"
+        ],
+        "exclude": []
+    }
+}
