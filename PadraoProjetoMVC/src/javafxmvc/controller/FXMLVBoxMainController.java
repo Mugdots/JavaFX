@@ -49,4 +49,10 @@ public class FXMLVBoxMainController implements Initializable {
         AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/javafxmvc/view/FXMLAnchorPaneCadastrosClientes.fxml"));
         anchorPane.getChildren().setAll(a);
     }
+    
+    @FXML
+    public void handleMenuItemProcessosVendas() throws IOException {
+        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/javafxmvc/view/FXMLAnchorPaneProcessosVendas.fxml"));
+        anchorPane.getChildren().setAll(a);
+    }
 }

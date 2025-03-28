@@ -78,8 +78,10 @@ public class VendaDAO {
         List<Venda> retorno = new ArrayList<>();
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
+            System.out.println("AAA");
             ResultSet resultado = stmt.executeQuery();
             while (resultado.next()) {
+                System.out.println("SA");
                 Venda venda = new Venda();
                 Cliente cliente = new Cliente();
                 List<ItemDeVenda> itensDeVenda = new ArrayList();
@@ -134,7 +136,7 @@ public class VendaDAO {
     }
 
     public Venda buscarUltimaVenda() {
-        String sql = "SELECT max(cdVenda) FROM vendas";
+        String sql = "SELECT max(cd_venda) FROM vendas";
         Venda retorno = new Venda();
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
@@ -151,7 +153,7 @@ public class VendaDAO {
     }
 
     public Map<Integer, ArrayList> listarQuantidadeVendasPorMes() {
-        String sql = "select count(cdVenda), extract(year from data) as ano, extract(month from data) as mes from vendas group by ano, mes order by ano, mes";
+        String sql = "select count(cd_venda), extract(year from data) as ano, extract(month from data) as mes from vendas group by ano, mes order by ano, mes";
         Map<Integer, ArrayList> retorno = new HashMap();
         
         try {

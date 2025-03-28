@@ -38,7 +38,7 @@ public class ClienteDAO {
     }
 
     public boolean alterar(Cliente cliente) {
-        String sql = "UPDATE clientes SET nome=?, cpf=?, telefone=? WHERE cd_cliente=?";
+        String sql = "UPDATE clientes SET nome=?, cpf=?, telefone=? WHERE cdCliente=?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, cliente.getNome());
@@ -54,7 +54,7 @@ public class ClienteDAO {
     }
 
     public boolean remover(Cliente cliente) {
-        String sql = "DELETE FROM clientes WHERE cd_cliente=?";
+        String sql = "DELETE FROM clientes WHERE cdCliente=?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setInt(1, cliente.getCdCliente());
@@ -74,7 +74,7 @@ public class ClienteDAO {
             ResultSet resultado = stmt.executeQuery();
             while (resultado.next()) {
                 Cliente cliente = new Cliente();
-                cliente.setCdCliente(resultado.getInt("cd_cliente"));
+                cliente.setCdCliente(resultado.getInt("cdCliente"));
                 cliente.setNome(resultado.getString("nome"));
                 cliente.setCpf(resultado.getString("cpf"));
                 cliente.setTelefone(resultado.getString("telefone"));
@@ -87,7 +87,7 @@ public class ClienteDAO {
     }
 
     public Cliente buscar(Cliente cliente) {
-        String sql = "SELECT * FROM clientes WHERE cd_cliente=?";
+        String sql = "SELECT * FROM clientes WHERE cdCliente=?";
         Cliente retorno = new Cliente();
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
