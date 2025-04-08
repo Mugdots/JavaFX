@@ -24,7 +24,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Gráficos">
             <items>
-              <MenuItem mnemonicParsing="false" text="Vendas por Mês" />
+              <MenuItem mnemonicParsing="false" onAction="#handleMenuItemGraficosVendasPorMes" text="Vendas por Mês" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Relatórios">
