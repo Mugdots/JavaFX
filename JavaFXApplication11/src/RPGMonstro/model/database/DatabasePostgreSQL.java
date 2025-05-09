@@ -5,6 +5,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9d769011d852d29cdfb8af150737f84a4dc14d24
 /**
  *
  * @author Rafael Vargas Mesquita

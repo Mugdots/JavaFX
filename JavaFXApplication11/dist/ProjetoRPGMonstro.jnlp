@@ -8,11 +8,19 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+<<<<<<< HEAD
     <jar href="ProjetoRPGMonstro.jar" size="22140" download="eager" />
+=======
+    <jar href="ProjetoRPGMonstro.jar" size="17068" download="eager" />
+>>>>>>> 9d769011d852d29cdfb8af150737f84a4dc14d24
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="ProjetoRPGMonstro" >
     <param name="requiredFXVersion" value="8.0+"/>
   </applet-desc>
+<<<<<<< HEAD
   <jfx:javafx-desc  width="800" height="600" main-class="RPGMonstro.view.Main"  name="ProjetoRPGMonstro" />
+=======
+  <jfx:javafx-desc  width="800" height="600" main-class="RPGMonstro.Main"  name="ProjetoRPGMonstro" />
+>>>>>>> 9d769011d852d29cdfb8af150737f84a4dc14d24
   <update check="always"/>
 </jnlp>
