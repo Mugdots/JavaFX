@@ -1,7 +1,6 @@
 package RPGMonstro.model.dao;
 
-import RPGMonstro.model.domain.Criatura;
-import RPGMonstro.model.domain.Nivel;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import RPGMonstro.model.domain.Criatura;
+import RPGMonstro.model.domain.Nivel;
 
 public class CriaturaDAO {
 
