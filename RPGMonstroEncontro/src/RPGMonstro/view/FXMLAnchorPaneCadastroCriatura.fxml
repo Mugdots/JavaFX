@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="711.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="RPGMonstro.Controller.FXMLAnchorPaneCadastroCriaturaController">
+   <children>
+      <SplitPane prefHeight="400.0" prefWidth="439.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="666.0">
+               <children>
+                  <TableView fx:id="tableViewCriatura" prefHeight="400.0" prefWidth="431.0">
+                    <columns>
+                      <TableColumn fx:id="tableColumnNomeCriatura" prefWidth="91.0" text="Nome" />
+                      <TableColumn fx:id="tableColumnRaridadeCriatura" prefWidth="61.0" text="Raridade" />
+                      <TableColumn fx:id="tableColumnTamanhoCriatura" prefWidth="93.0" text="Tamanho" />
+                      <TableColumn fx:id="tableColumnNivelCriatura" prefWidth="64.0" text="Nivel" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="175.0" />
+      <GridPane layoutX="449.0" layoutY="33.0" prefHeight="238.0" prefWidth="249.0">
+        <columnConstraints>
+          <ColumnConstraints />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="78.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="122.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Nome:" GridPane.columnIndex="1" />
+            <Label text="Nível" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Raridade" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Tamanho" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label text="CA" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label text="PV" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label text="Sentido" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label text="Deslocamento" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <Label fx:id="labelNomeCriatura" GridPane.columnIndex="2" />
+            <Label fx:id="labelNivelCriatura" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label fx:id="labelRaridadeCriatura" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Label fx:id="labelTamanhoCriatura" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Label fx:id="labelCACriatura" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Label fx:id="labelPVCriatura" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <Label fx:id="labelSentidoCriatura" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <Label fx:id="labelDeslocamentoCriatura" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+         </children>
+      </GridPane>
+      <Button layoutX="467.0" layoutY="354.0" mnemonicParsing="false" onAction="#handleButtonInserir" text="Inserir" />
+      <Button fx:id="buttonAlterar" layoutX="547.0" layoutY="354.0" mnemonicParsing="false" text="Alterar" />
+      <Button fx:id="buttonRemover" layoutX="633.0" layoutY="354.0" mnemonicParsing="false" text="Remover" />
+      <Label layoutX="543.0" layoutY="8.0" text="Criatura">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
