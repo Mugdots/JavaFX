@@ -18,7 +18,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Processo">
             <items>
-              <MenuItem fx:id="menuItemProcessosCriadorEncontros" mnemonicParsing="false" text="Criador de Encontros" />
+              <MenuItem fx:id="menuItemProcessosCriadorEncontros" mnemonicParsing="false" onAction="#handleMenuItemProcessoTabelaEncontro" text="Criador de Encontros" />
             </items>
           </Menu>
         </menus>

@@ -30,12 +30,11 @@ public class NivelDAO {
     }
     
     public boolean inserir(Nivel nivel) {
-        String sql = "INSERT INTO nivel(nivel_criatura_id, XP_gasto, criatura_max_nivel VALUES(?, ?, ?)";
+        String sql = "INSERT INTO nivel(nivel_criatura_id, XP_gasto VALUES(?, ?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, nivel.getNivel_criatura_id());
+            stmt.setInt(1, nivel.getCriatura_nivel_num());
             stmt.setInt(2, nivel.getXP_gasto());
-            stmt.setInt(3, nivel.getCriatura_max_nivel());
             stmt.execute();
             return true;
         } catch (SQLException ex) {
@@ -45,13 +44,12 @@ public class NivelDAO {
     }
 
     public boolean alterar(Nivel Nivel) {   
-        String sql = "UPDATE nivel SET nivel_criatura=?, XP_gasto=?, criatura_max_nivel=? WHERE cd_nivel=?";
+        String sql = "UPDATE nivel SET nivel_criatura=?, XP_gasto=? WHERE cd_nivel=?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, Nivel.getNivel_criatura_id());
+            stmt.setInt(1, Nivel.getCriatura_nivel_num());
             stmt.setInt(2, Nivel.getXP_gasto());
-            stmt.setInt(3, Nivel.getCriatura_max_nivel());
-            stmt.setInt(4, Nivel.getCd_nivel());
+            stmt.setInt(3, Nivel.getCd_nivel());
             stmt.execute();
             return true;
         } catch (SQLException ex) {
@@ -83,13 +81,12 @@ public class NivelDAO {
                 Nivel nivel = new Nivel();
                 List<Criatura> criaturas = new ArrayList();
                 nivel.setCd_nivel(resultado.getInt("cd_nivel"));
-                nivel.setNivel_criatura_id(resultado.getInt("nivel_criatura_id"));
+                nivel.setCriatura_nivel_num(resultado.getInt("criatura_nivel_num"));
                 nivel.setXP_gasto(resultado.getInt("XP_gasto"));
-                nivel.setCriatura_max_nivel(resultado.getInt("criatura_max_nivel"));
                 
                 CriaturaDAO criaturaDAO = new CriaturaDAO();
                 criaturaDAO.setConnection(connection);
-                criaturas = criaturaDAO.ListarCriaturaPorNivel(nivel);
+                //criaturas = criaturaDAO.ListarCriaturaPorNivel(nivel);
                 nivel.setCriatura_nivel_encontro(criaturas);
                 retorno.add(nivel);
             }
@@ -108,9 +105,8 @@ public class NivelDAO {
             ResultSet resultado = stmt.executeQuery();
             if (resultado.next()) {
                 nivel.setCd_nivel(resultado.getInt("cd_nivel"));
-                nivel.setNivel_criatura_id(resultado.getInt("nivel_criatura_id"));
+                nivel.setCriatura_nivel_num(resultado.getInt("criatura_nivel_num"));
                 nivel.setXP_gasto(resultado.getInt("XP_gasto"));
-                nivel.setCriatura_max_nivel(resultado.getInt("criatura_max_nivel"));
                 retorno = nivel;
             }
         } catch (SQLException ex) {

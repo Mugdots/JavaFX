@@ -40,5 +40,12 @@ public class FXMLBoxMainController implements Initializable {
         AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/RPGMonstro/view/FXMLAnchorPaneCadastroCriatura.fxml"));
         anchorPane.getChildren().setAll(a);
     }
+    
+    @FXML
+    public void handleMenuItemProcessoTabelaEncontro() throws IOException {
+        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/RPGMonstro/view/FXMLTabelaEncontro.fxml"));
+        anchorPane.getChildren().setAll(a);
+    }
+    
 }
     

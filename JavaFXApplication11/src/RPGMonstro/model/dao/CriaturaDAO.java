@@ -1,11 +1,8 @@
 package RPGMonstro.model.dao;
 
-<<<<<<< HEAD
 
-=======
 import RPGMonstro.model.domain.Criatura;
 import RPGMonstro.model.domain.Nivel;
->>>>>>> 9d769011d852d29cdfb8af150737f84a4dc14d24
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,11 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-<<<<<<< HEAD
 import RPGMonstro.model.domain.Criatura;
 import RPGMonstro.model.domain.Nivel;
-=======
->>>>>>> 9d769011d852d29cdfb8af150737f84a4dc14d24
+
 
 public class CriaturaDAO {
 
@@ -141,12 +136,12 @@ public class CriaturaDAO {
     }
     
     
-    public List<Criatura> ListarCriaturaPorNivel(Nivel nivel) {
+    public List<Criatura> ListarCriaturaPorNivel(int nivel) {
         String sql = "SELECT * FROM criatura WHERE nivel_criatura=?";
         List<Criatura> retorno = new ArrayList<>();
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, nivel.getNivel_criatura_id());
+            stmt.setInt(1, nivel);
             ResultSet resultado = stmt.executeQuery();
             while (resultado.next()) {
                 Criatura criatura = new Criatura();

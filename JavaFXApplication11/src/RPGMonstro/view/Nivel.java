@@ -1,17 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package RPGMonstro.model.domain;
 
+import RPGMonstro.model.domain.Criatura;
 import java.util.List;
 
 public class Nivel {
     private int cd_nivel;
-    private int nivel_criatura_id;
+    private int criatura_nivel_num;
     private int XP_gasto;
-    private int criatura_max_nivel;
     private List<Criatura> criatura_nivel_encontro;
 
     
@@ -19,11 +15,10 @@ public class Nivel {
         
     }
 
-    public Nivel(int cd_nivel, int nivel_criatura_id, int XP_gasto, int criatura_max_nivel, List<Criatura> criatura_nivel_encontro) {
+    public Nivel(int cd_nivel, int nivel_criatura_id, int XP_gasto, List<Criatura> criatura_nivel_encontro) {
         this.cd_nivel = cd_nivel;
-        this.nivel_criatura_id = nivel_criatura_id;
+        this.criatura_nivel_num = nivel_criatura_id;
         this.XP_gasto = XP_gasto;
-        this.criatura_max_nivel = criatura_max_nivel;
         this.criatura_nivel_encontro = criatura_nivel_encontro;
     }
 
@@ -35,12 +30,12 @@ public class Nivel {
         this.cd_nivel = cd_nivel;
     }
 
-    public int getNivel_criatura_id() {
-        return nivel_criatura_id;
+    public int getCriatura_nivel_num() {
+        return criatura_nivel_num;
     }
 
-    public void setNivel_criatura_id(int nivel_criatura_id) {
-        this.nivel_criatura_id = nivel_criatura_id;
+    public void setCriatura_nivel_num(int criatura_nivel_num) {
+        this.criatura_nivel_num = criatura_nivel_num;
     }
 
     public int getXP_gasto() {
@@ -49,14 +44,6 @@ public class Nivel {
 
     public void setXP_gasto(int XP_gasto) {
         this.XP_gasto = XP_gasto;
-    }
-
-    public int getCriatura_max_nivel() {
-        return criatura_max_nivel;
-    }
-
-    public void setCriatura_max_nivel(int criatura_max_nivel) {
-        this.criatura_max_nivel = criatura_max_nivel;
     }
 
     public List<Criatura> getCriatura_nivel_encontro() {
