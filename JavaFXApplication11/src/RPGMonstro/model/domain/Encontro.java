@@ -1,21 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package RPGMonstro.model.domain;
-
-import java.util.List;
 
 public class Encontro {
     private int cd_encontro;
     private int nivel_grupo_encontro;
     private int tamanho_grupo_encontro;
     private int saldo_XP_encontro;
+    private int gasto_XP_encontro;
     private String ameaca_encontro;
-    private List<Nivel> nivel_criatura_encontro;
-
-
+    
     public Encontro() {
 
     }
@@ -67,14 +59,13 @@ public class Encontro {
     public void setAmeaca_encontro(String ameaca_encontro) {
         this.ameaca_encontro = ameaca_encontro;
     }
-
-    public List<Nivel> getNivel_criatura_encontro() {
-        return nivel_criatura_encontro;
-    }
-
-    public void setNivel_criatura_encontro(List<Nivel> nivel_criatura_encontro) {
-        this.nivel_criatura_encontro = nivel_criatura_encontro;
-    }
-
     
+    public int getGasto_XP_encontro() {
+        return gasto_XP_encontro;
+    }
+
+    public void setGasto_XP_encontro(int gasto_XP_encontro) {
+        this.gasto_XP_encontro = gasto_XP_encontro;
+    }
+
 }
