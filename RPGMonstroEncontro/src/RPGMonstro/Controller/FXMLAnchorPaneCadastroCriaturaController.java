@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package RPGMonstro.Controller;
 
+
+import RPGMonstro.model.domain.Criatura;
 import RPGMonstro.model.dao.CriaturaDAO;
 import RPGMonstro.model.database.Database;
 import RPGMonstro.model.database.DatabaseFactory;
-import RPGMonstro.model.domain.Criatura;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -20,19 +16,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author 20231si008
- */
+
 public class FXMLAnchorPaneCadastroCriaturaController implements Initializable {
 
     @FXML
@@ -45,6 +38,7 @@ public class FXMLAnchorPaneCadastroCriaturaController implements Initializable {
     private TableColumn<Criatura, String> tableColumnTamanhoCriatura;
     @FXML
     private TableColumn<Criatura, Integer> tableColumnNivelCriatura;
+    
     @FXML
     private Label labelNomeCriatura;
     @FXML
@@ -74,7 +68,6 @@ public class FXMLAnchorPaneCadastroCriaturaController implements Initializable {
     private final Database database = DatabaseFactory.getDatabase("postgresql");
     private final Connection connection = database.conectar();
     private final CriaturaDAO criaturaDAO = new CriaturaDAO();
-    
     
     
     @Override
@@ -136,14 +129,32 @@ public class FXMLAnchorPaneCadastroCriaturaController implements Initializable {
     
     @FXML       
     public void handleButtonAlterar() throws IOException {
-        
+        Criatura c1 = tableViewCriatura.getSelectionModel().getSelectedItem();
+        if (c1 != null) {
+            boolean botaoConfimarClicado = mostrarFXMLAnchorPaneCadastroCriaturaDialog(c1);
+            if (botaoConfimarClicado) {
+                criaturaDAO.alterar(c1);
+                carregarTableViewCriatura();
+            } 
+        } else {
+            Alert al = new Alert(Alert.AlertType.ERROR);
+            al.setContentText("Por favor, escolha uma criatura na Tabela");
+            al.show();
+        }
     }
     
     @FXML         
     public void handleButtonRemover() throws IOException {
-        
+        Criatura c1 = tableViewCriatura.getSelectionModel().getSelectedItem();
+        if (c1 != null) {
+            criaturaDAO.remover(c1);
+            carregarTableViewCriatura();
+        } else {
+                Alert al = new Alert(Alert.AlertType.ERROR);
+                al.setContentText("Por favor, escolha uma criatura na Tabela");
+                al.show();
+        }
     }
-    
     
     public boolean mostrarFXMLAnchorPaneCadastroCriaturaDialog(Criatura criatura) throws IOException {
         FXMLLoader loader = new FXMLLoader();
@@ -165,8 +176,4 @@ public class FXMLAnchorPaneCadastroCriaturaController implements Initializable {
         dialogStage.showAndWait();
         return controlador.oBotaofoiClicado();
     }
-    
-    
-    
-    
 }

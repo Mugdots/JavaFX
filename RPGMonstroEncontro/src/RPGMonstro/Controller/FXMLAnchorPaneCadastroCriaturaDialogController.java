@@ -1,11 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package RPGMonstro.Controller;
 
 import RPGMonstro.model.domain.Criatura;
+import RPGMonstro.model.domain.Raridade;
+import RPGMonstro.model.domain.Tamanho;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -14,21 +11,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
-import RPGMonstro.model.domain.Raridade;
-import RPGMonstro.model.domain.Tamanho;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.stage.Stage;
-/**
- * FXML Controller class
- *
- * @author PC
- */
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class FXMLAnchorPaneCadastroCriaturaDialogController implements Initializable {
 
     @FXML
@@ -41,14 +32,12 @@ public class FXMLAnchorPaneCadastroCriaturaDialogController implements Initializ
     private TextField textFieldDeslocamentoCriatura;
     @FXML
     private TextField textFieldSentidoCriatura;
-    
-    @FXML
-    private Spinner<Integer> spinnerNivelCriatura;
     @FXML
     private ChoiceBox<Tamanho> ChoiceBoxTamanhoCriatura;
     @FXML
     private ChoiceBox<Raridade> ChoiceBoxRaridadeCriatura;
-   
+    @FXML
+    private Spinner<Integer> spinnerNivelCriatura;
     @FXML
     private Button buttonConfimar;
     @FXML
@@ -58,16 +47,13 @@ public class FXMLAnchorPaneCadastroCriaturaDialogController implements Initializ
     private boolean botaoConfimarClicado = false;
     private Criatura criatura;
     
+    private List<Tamanho> listTamanho = new ArrayList();
+    private ObservableList<Tamanho> observableListTamanho;
     
-    List<Tamanho> listTamanho = new ArrayList();
-    ObservableList<Tamanho> observableListTamanho;
-    
-    List<Raridade> listRaridade = new ArrayList();
-    ObservableList<Raridade> observableListRaridade;
+    private List<Raridade> listRaridade = new ArrayList();
+    private ObservableList<Raridade> observableListRaridade;
    
-    /**
-     * Initializes the controller class.
-     */
+  
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -93,8 +79,6 @@ public class FXMLAnchorPaneCadastroCriaturaDialogController implements Initializ
         this.spinnerNivelCriatura.setValueFactory(valueFactory);
         this.ChoiceBoxTamanhoCriatura.setItems(carregarComboBoxTamanho());
         this.ChoiceBoxRaridadeCriatura.setItems(carregarComboBoxRaridade());
-        
-        
     }
     
     public boolean oBotaofoiClicado() {
@@ -114,13 +98,13 @@ public class FXMLAnchorPaneCadastroCriaturaDialogController implements Initializ
             botaoConfimarClicado = true;
             dialogStage.close();
         }
-        
-
+    }
+       
+    public void handleButtonCancelar() {
+        dialogStage.close();
     }
 
     public ObservableList<Tamanho> carregarComboBoxTamanho() {
-        
-        
         Collections.addAll(listTamanho, Tamanho.values());
         observableListTamanho = FXCollections.observableArrayList(listTamanho);
         
@@ -129,16 +113,10 @@ public class FXMLAnchorPaneCadastroCriaturaDialogController implements Initializ
         
     
     public ObservableList<Raridade> carregarComboBoxRaridade() {
-        
         Collections.addAll(listRaridade, Raridade.values());
         observableListRaridade = FXCollections.observableArrayList(listRaridade);
         
        return observableListRaridade;
-    }
-
- 
-    public void handleButtonCancelar() {
-        dialogStage.close();
     }
     
     private boolean validarEntradaDados() {
@@ -170,6 +148,4 @@ public class FXMLAnchorPaneCadastroCriaturaDialogController implements Initializ
             return false;
         }
     }
-
-
 }
