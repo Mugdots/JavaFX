@@ -13,12 +13,17 @@
             <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/Controller/FXMLAnchorPaneRelatorioQuantCriaturaController.java</file>
             <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/model/dao/CriaturaDAO.java</file>
             <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/Controller/FXMLAnchorPaneCadastroCriaturaDialogController.java</file>
+            <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/Controller/FXMLAnchorPaneTabelaEncontroDialogController.java</file>
             <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/model/dao/EncontroDAO.java</file>
             <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/model/domain/Criatura_Encontro.java</file>
             <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/view/FXMLAnchorPaneRelatorioQuantCriatura.fxml</file>
             <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/view/FXMLAnchorPaneGraficosEncontrosPorNivelCriatura.fxml</file>
+            <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/Controller/FXMLAnchorPaneTabelaEncontroController.java</file>
             <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/view/FXMLAnchorPaneProcessoEncontro.fxml</file>
             <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/model/domain/Criatura.java</file>
+            <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/model/domain/Raridade.java</file>
+            <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/model/domain/Ameaca.java</file>
+            <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/model/domain/Tamanho.java</file>
         </group>
     </open-files>
 </project-private>

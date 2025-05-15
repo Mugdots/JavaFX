@@ -18,8 +18,9 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -54,7 +55,8 @@ public class FXMLAnchorPaneTabelaEncontroDialogController implements Initializab
     private Label labelRaridade;
     @FXML
     private Label labelId;
-    
+    @FXML
+    private Spinner<Integer> spinnerQuantCriatura;
     private Stage dialogStage;
     private boolean botaoConfimarClicado = false;
     
@@ -65,13 +67,17 @@ public class FXMLAnchorPaneTabelaEncontroDialogController implements Initializab
     private final Connection connection = database.conectar();
     private final CriaturaDAO criaturaDAO = new CriaturaDAO();
     
-    
     private Criatura criatura;
     private int nivelCriatura;
-    
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        carregarSpinnerQuantidadeCriatura();
     }
+    
+    public boolean oBotaofoiClicado() {
+        return botaoConfimarClicado;
+    } 
 
     public Stage getStage() {
         return dialogStage;
@@ -85,7 +91,10 @@ public class FXMLAnchorPaneTabelaEncontroDialogController implements Initializab
         this.criatura = criatura;
     }
     
-    
+    public Integer getQuantidade() {
+        return spinnerQuantCriatura.getValue();
+    }
+
     public void setNivelCriatura(int nivel) {
         this.nivelCriatura = nivel;
         criaturaDAO.setConnection (connection);
@@ -98,31 +107,11 @@ public class FXMLAnchorPaneTabelaEncontroDialogController implements Initializab
                 (observable, oldValue, newValue) -> selecionarItemTableViewCriatura(newValue));
     }
     
-    public boolean oBotaofoiClicado() {
-        return botaoConfimarClicado;
+    public void carregarSpinnerQuantidadeCriatura() {
+        SpinnerValueFactory<Integer> valueSpinnerQuant = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10, 1);
+        spinnerQuantCriatura.setValueFactory(valueSpinnerQuant);
     }
-    
-    @FXML
-    private void handleButtonConfimar() {
-        Criatura criatura1 = tableViewCriaturaPorNivel.getSelectionModel().getSelectedItem();
-        criatura.setCd_criatura(criatura1.getCd_criatura());
-        criatura.setNome_criatura(criatura1.getNome_criatura());
-        criatura.setNivel_criatura(criatura1.getNivel_criatura());
-        criatura.setClasse_armadura_criatura(criatura1.getClasse_armadura_criatura());
-        criatura.setPts_vida_criatura(criatura1.getPts_vida_criatura());
-        criatura.setDeslocamento_criatura(criatura1.getDeslocamento_criatura());
-        criatura.setRaridade_criatura(criatura1.getRaridade_criatura());
-        criatura.setSentido_criatura(criatura1.getSentido_criatura());
-        criatura.setTamanho_criatura(criatura1.getTamanho_criatura());
-        botaoConfimarClicado = true;
-        dialogStage.close();
-    }
-        
-    @FXML
-    private void handleButtonCancelar() {
-        dialogStage.close();
-    }
-    
+
     public void carregarTableViewCriatura() {
         listCriatura = criaturaDAO.ListarCriaturaPorNivel(nivelCriatura);    
         if (listCriatura != null) {
@@ -144,6 +133,35 @@ public class FXMLAnchorPaneTabelaEncontroDialogController implements Initializab
         }
     }
     
+    @FXML
+    private void handleButtonConfimar() {
+        Criatura criatura1 = tableViewCriaturaPorNivel.getSelectionModel().getSelectedItem();
+        if (criatura1 != null) {
+            criatura.setCd_criatura(criatura1.getCd_criatura());
+            criatura.setNome_criatura(criatura1.getNome_criatura());
+            criatura.setNivel_criatura(criatura1.getNivel_criatura());
+            criatura.setClasse_armadura_criatura(criatura1.getClasse_armadura_criatura());
+            criatura.setPts_vida_criatura(criatura1.getPts_vida_criatura());
+            criatura.setDeslocamento_criatura(criatura1.getDeslocamento_criatura());
+            criatura.setRaridade_criatura(criatura1.getRaridade_criatura());
+            criatura.setSentido_criatura(criatura1.getSentido_criatura());
+            criatura.setTamanho_criatura(criatura1.getTamanho_criatura());
+            botaoConfimarClicado = true;    
+            dialogStage.close();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Nada foi Selecionado");
+            alert.show();
+            botaoConfimarClicado = false; 
+        }
+    }
+        
+    @FXML
+    private void handleButtonCancelar() {
+        dialogStage.close();
+    }
+    
+
     public void selecionarItemTableViewCriatura(Criatura criatura) {
         if (criatura != null) {
             labelNome.setText(String.valueOf(criatura.getNome_criatura()));

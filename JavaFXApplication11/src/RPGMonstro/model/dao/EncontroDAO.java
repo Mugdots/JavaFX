@@ -84,18 +84,12 @@ public class EncontroDAO {
             ResultSet resultado = stmt.executeQuery();
             while (resultado.next()) {
                 Encontro encontro = new Encontro();
-                //List<Nivel> nivel = new ArrayList();
-                encontro.setCd_encontro(resultado.getInt("cd_criatura"));
+                encontro.setCd_encontro(resultado.getInt("cd_encontro"));
                 encontro.setNivel_grupo_encontro(resultado.getInt("nivel_grupo_encontro"));
                 encontro.setTamanho_grupo_encontro(resultado.getInt("tamanho_grupo_encontro"));
                 encontro.setSaldo_XP_encontro(resultado.getInt("saldo_xp_encontro"));
-                encontro.setAmeaca_encontro(resultado.getString("dificuldade_encontro"));
-                
-                //NivelDAO nivelDAO = new NivelDAO();
-                //nivelDAO.setConnection(connection);
-                //nivel = nivelDAO.listar();
-                //encontro.setNivel_criatura_encontro(nivel);
-                
+                encontro.setGasto_XP_encontro(resultado.getInt("gasto_xp_encontro"));
+                encontro.setAmeaca_encontro(resultado.getString("ameaca_encontro"));
                 retorno.add(encontro);
                 
             }

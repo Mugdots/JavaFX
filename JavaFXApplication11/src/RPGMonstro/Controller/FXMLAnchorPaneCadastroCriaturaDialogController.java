@@ -92,8 +92,8 @@ public class FXMLAnchorPaneCadastroCriaturaDialogController implements Initializ
             criatura.setRaridade_criatura(String.valueOf(ChoiceBoxRaridadeCriatura.getSelectionModel().getSelectedItem()));
             criatura.setSentido_criatura(textFieldSentidoCriatura.getText());
             criatura.setNivel_criatura(spinnerNivelCriatura.getValue());
-            criatura.setPts_vida_criatura(Integer.parseInt(textFieldPVCriatura.getText()));
-            criatura.setClasse_armadura_criatura(Integer.parseInt(textFieldCACriatura.getText()));
+            criatura.setPts_vida_criatura(Integer.valueOf(textFieldPVCriatura.getText()));
+            criatura.setClasse_armadura_criatura(Integer.valueOf(textFieldCACriatura.getText()));
             criatura.setDeslocamento_criatura(textFieldDeslocamentoCriatura.getText());
             botaoConfimarClicado = true;
             dialogStage.close();
@@ -128,15 +128,38 @@ public class FXMLAnchorPaneCadastroCriaturaDialogController implements Initializ
 
         if (textFieldSentidoCriatura.getText() == null 
                 || textFieldSentidoCriatura.getText().length() == 0) {
-            mensagemErro += "cpf invalido";
+            mensagemErro += "sentido invalido";
         }
-
 
         if (textFieldDeslocamentoCriatura.getText() == null 
                 || textFieldDeslocamentoCriatura.getText().length() == 0) {
-            mensagemErro += "telefone invalido";
+            mensagemErro += "deslocamento invalido";
         }
-
+        
+        if (ChoiceBoxTamanhoCriatura.getSelectionModel().getSelectedItem() == null) {
+            mensagemErro += "tamanho nulo";
+        }
+        
+        if (ChoiceBoxRaridadeCriatura.getSelectionModel().getSelectedItem() == null) {
+            mensagemErro += "raridade nula";
+        }
+        
+        if (spinnerNivelCriatura.getValue() == null) {
+            mensagemErro += "nivel não escolhido";
+        }
+            
+        if (textFieldPVCriatura.getText() == null 
+                || textFieldPVCriatura.getText().length() == 0) {
+            mensagemErro += "vida não escolhida / pontos de vidas como 0";
+        }
+        
+      
+        if (textFieldCACriatura.getText() == null 
+                || textFieldCACriatura.getText().length() == 0) {
+            mensagemErro += "vida não escolhida / ca como 0";
+        }
+        
+       
         if (mensagemErro.length() == 0) {
             return true;
         } else {

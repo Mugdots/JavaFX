@@ -12,11 +12,12 @@ public class Encontro {
 
     }
 
-    public Encontro(int nivel_grupo_encontro, int tamanho_grupo_encontro, int saldo_XP_encontro, String dificuldade_encontro) {
+    public Encontro(int nivel_grupo_encontro, int tamanho_grupo_encontro, int saldo_XP_encontro, String dificuldade_encontro, int gasto_XP_encontro) {
         this.nivel_grupo_encontro = nivel_grupo_encontro;
         this.tamanho_grupo_encontro = tamanho_grupo_encontro;
         this.saldo_XP_encontro = saldo_XP_encontro;
         this.ameaca_encontro = dificuldade_encontro;
+        this.gasto_XP_encontro = gasto_XP_encontro;
     }
 
     public int getCd_encontro() {
@@ -61,7 +62,7 @@ public class Encontro {
     }
     
     public int getGasto_XP_encontro() {
-        return gasto_XP_encontro;
+        return this.gasto_XP_encontro;
     }
 
     public void setGasto_XP_encontro(int gasto_XP_encontro) {

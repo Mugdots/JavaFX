@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import RPGMonstro.model.domain.Criatura;
+import RPGMonstro.model.domain.Encontro;
 
 
 public class CriaturaDAO {
@@ -140,6 +141,33 @@ public class CriaturaDAO {
             PreparedStatement stmt = connection.prepareStatement(sql);
             System.out.println(nivel);
             stmt.setInt(1, nivel);
+            ResultSet resultado = stmt.executeQuery();
+            while (resultado.next()) {
+                Criatura criatura = new Criatura();
+                criatura.setCd_criatura(resultado.getInt("cd_criatura"));
+                criatura.setNivel_criatura(resultado.getInt("nivel_criatura"));
+                criatura.setNome_criatura(resultado.getString("nome_criatura"));
+                criatura.setTamanho_criatura(resultado.getString("tamanho_criatura"));
+                criatura.setRaridade_criatura(resultado.getString("raridade_criatura"));
+                criatura.setDeslocamento_criatura(resultado.getString("deslocamento_criatura"));
+                criatura.setSentido_criatura(resultado.getString("sentido_criatura"));
+                criatura.setPts_vida_criatura(resultado.getInt("pts_vida_criatura"));
+                criatura.setClasse_armadura_criatura(resultado.getInt("classe_armadura_criatura"));  
+                retorno.add(criatura);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CriaturaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return retorno;
+    }
+    
+    
+    public List<Criatura> ListarCriaturaPorEncontro(Encontro encontro) {
+        String sql = "SELECT c.* FROM criatura c, criatura_encontro ce WHERE c.cd_criatura = ce.cd_criatura_CE AND ce.cd_encontro_CE = ?";
+        List<Criatura> retorno = new ArrayList<>();
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, encontro.getCd_encontro());
             ResultSet resultado = stmt.executeQuery();
             while (resultado.next()) {
                 Criatura criatura = new Criatura();
