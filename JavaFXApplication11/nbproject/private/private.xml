@@ -3,27 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/Controller/FXMLAnchorPaneGraficosEncontrosPorNivelCriaturaController.java</file>
-            <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/model/domain/Encontro.java</file>
-            <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/model/dao/Criatura_EncontroDAO.java</file>
-            <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/Controller/FXMLAnchorPaneCadastroCriaturaController.java</file>
-            <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/Controller/FXMLBoxMainController.java</file>
-            <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/view/Main.java</file>
-            <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/Controller/FXMLAnchorPaneProcessoEncontroController.java</file>
-            <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/Controller/FXMLAnchorPaneRelatorioQuantCriaturaController.java</file>
-            <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/model/dao/CriaturaDAO.java</file>
-            <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/Controller/FXMLAnchorPaneCadastroCriaturaDialogController.java</file>
-            <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/Controller/FXMLAnchorPaneTabelaEncontroDialogController.java</file>
-            <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/model/dao/EncontroDAO.java</file>
-            <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/model/domain/Criatura_Encontro.java</file>
-            <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/view/FXMLAnchorPaneRelatorioQuantCriatura.fxml</file>
-            <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/view/FXMLAnchorPaneGraficosEncontrosPorNivelCriatura.fxml</file>
-            <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/Controller/FXMLAnchorPaneTabelaEncontroController.java</file>
-            <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/view/FXMLAnchorPaneProcessoEncontro.fxml</file>
-            <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/model/domain/Criatura.java</file>
-            <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/model/domain/Raridade.java</file>
-            <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/model/domain/Ameaca.java</file>
-            <file>file:/C:/Users/PC/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/model/domain/Tamanho.java</file>
+            <file>file:/C:/Users/20231si008/Documents/NetBeansProjects/JavaFXApplication11/src/RPGMonstro/view/Main.java</file>
         </group>
     </open-files>
 </project-private>

@@ -9,7 +9,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import RPGMonstro.model.domain.Criatura;
+import RPGMonstro.model.domain.Criatura_Quantidade;
 import RPGMonstro.model.domain.Encontro;
+import java.util.HashMap;
 
 
 public class CriaturaDAO {
@@ -163,7 +165,7 @@ public class CriaturaDAO {
     
     
     public List<Criatura> ListarCriaturaPorEncontro(Encontro encontro) {
-        String sql = "SELECT c.* FROM criatura c, criatura_encontro ce WHERE c.cd_criatura = ce.cd_criatura_CE AND ce.cd_encontro_CE = ?";
+        String sql = "SELECT c.*, ce.quant_criatura_encontro FROM criatura c, criatura_encontro ce, encontro e WHERE c.cd_criatura = ce.cd_criatura_CE AND ce.cd_encontro_CE=?";
         List<Criatura> retorno = new ArrayList<>();
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
@@ -171,6 +173,7 @@ public class CriaturaDAO {
             ResultSet resultado = stmt.executeQuery();
             while (resultado.next()) {
                 Criatura criatura = new Criatura();
+                //Criatura_Quantidade criatura_Quantidade = new Criatura_Quantidade();
                 criatura.setCd_criatura(resultado.getInt("cd_criatura"));
                 criatura.setNivel_criatura(resultado.getInt("nivel_criatura"));
                 criatura.setNome_criatura(resultado.getString("nome_criatura"));
@@ -180,7 +183,10 @@ public class CriaturaDAO {
                 criatura.setSentido_criatura(resultado.getString("sentido_criatura"));
                 criatura.setPts_vida_criatura(resultado.getInt("pts_vida_criatura"));
                 criatura.setClasse_armadura_criatura(resultado.getInt("classe_armadura_criatura"));  
+                //criatura_Quantidade.setCriatura(criatura);
+                //criatura_Quantidade.setQuantidade(resultado.getInt("quant_criatura_encontro"));
                 retorno.add(criatura);
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(CriaturaDAO.class.getName()).log(Level.SEVERE, null, ex);

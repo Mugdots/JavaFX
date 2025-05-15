@@ -5,30 +5,32 @@
  */
 package RPGMonstro.model.domain;
 
-/**
- *
- * @author PC
- */
+
 public class Criatura_Encontro {
-    private int cd_encontro_CE;
-    private int cd_criatura_CE;
+    private Encontro encontro_CE;
+    private Criatura criatura_CE;
     private int quant; 
-
-    public int getCd_encontro_CE() {
-        return cd_encontro_CE;
+    
+    public Criatura_Encontro() {
+        
     }
 
-    public void setCd_encontro_CE(int cd_encontro_CE) {
-        this.cd_encontro_CE = cd_encontro_CE;
+    public Encontro getEncontro_CE() {
+        return encontro_CE;
     }
 
-    public int getCd_criatura_CE() {
-        return cd_criatura_CE;
+    public void setEncontro_CE(Encontro encontro_CE) {
+        this.encontro_CE = encontro_CE;
     }
 
-    public void setCd_criatura_CE(int cd_criatura_CE) {
-        this.cd_criatura_CE = cd_criatura_CE;
+    public Criatura getCriatura_CE() {
+        return criatura_CE;
     }
+
+    public void setCriatura_CE(Criatura criatura_CE) {
+        this.criatura_CE = criatura_CE;
+    }
+
 
     public int getQuant() {
         return quant;
@@ -38,4 +40,7 @@ public class Criatura_Encontro {
         this.quant = quant;
     }
     
+    public Integer getNivelCriaturaCE() {
+        return criatura_CE != null ? criatura_CE.getNivel_criatura() : 0;
+    }
 }

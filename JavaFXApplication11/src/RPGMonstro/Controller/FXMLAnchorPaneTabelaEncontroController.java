@@ -20,11 +20,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -107,32 +104,49 @@ public class FXMLAnchorPaneTabelaEncontroController implements Initializable {
         spinnerNivelCriatura.setValueFactory(carregarSpinnerEncontro(1, 20, 1));
         spinnerTamanhoCriatura.setValueFactory(carregarSpinnerEncontro(2, 10, 4));
         carregarChoiceBoxAmeacaEncontro();
-        carregarCriadorDesignEncontro();   
+        //carregarCriadorDesignEncontro();   
     }    
     
+     //   int difNivel = -4;
+        //indiceNivelAtual = nivelGrupoEncontro - 4;
+        //if (indiceNivelAtual < -1) {
+       //     difNivel = -1 * indiceNivelAtual - 5;
+       //     indiceNivelAtual = -1; 
+       // } 
+ 
+    public int calcularDiferencaNivel(int nivelGrupoEncontro) {  
+        int difNivel = indiceNivelAtual - nivelGrupoEncontro;
+        if ((nivelGrupoEncontro + difNivel) < -1) {
+            difNivel = -1 * (nivelGrupoEncontro - 4) - 5;
+            if (nivelGrupoEncontro + difNivel == -3) {
+                indiceNivelAtual = -1; 
+            }
+        }  
+        return difNivel;
+    }
+    
+    
+    
     @FXML
-    public void carregarCriadorDesignEncontro() {
+    public void zerarCriadorDesignEncontro() {
+        listCriaturaEncontro.clear();
         int tamanhoGrupoEncontro = spinnerTamanhoCriatura.getValue();
-        int nivelGrupoEncontro = spinnerNivelCriatura.getValue(); 
+        int nivelGrupoEncontro = spinnerNivelCriatura.getValue();
         Ameaca ameacaEncontro = choiceBoxAmeacaEncontro.getSelectionModel().getSelectedItem();
+        
         int xp = (tamanhoGrupoEncontro * ameacaEncontro.valorXP);
-        int difNivel = -4;
+        xpGasto = 0;
         indiceNivelAtual = nivelGrupoEncontro - 4;
         
+        int difNivel = -4;
         if (indiceNivelAtual < -1) {
             difNivel = -1 * indiceNivelAtual - 5;
             indiceNivelAtual = -1; 
-        }        
+        }         
         int tamanhoListaCriatura = listCriaturaPorNivel.size();
         int criaturaMax = xp / xpPorNivel.get(difNivel);
-        labelNivel.setText(String.valueOf(indiceNivelAtual));
-        labelXPNivel.setText(String.valueOf(xpPorNivel.get(difNivel)));
-        labelCriaturaMaxima.setText(String.valueOf(criaturaMax));
-        labelCriaturaRestante.setText(String.valueOf(criaturaMax - tamanhoListaCriatura));                    
         labelSaldoXP.setText(String.valueOf(xp));
-        labelGasto.setText(String.valueOf(xpGasto));
-        labelRestante.setText(String.valueOf(xp - xpGasto));
-    
+        //carregarCriadorDesignEncontro(difNivel, criaturaMax, xp, tamanhoListaCriatura);
     }
     
     @FXML 
@@ -157,33 +171,23 @@ public class FXMLAnchorPaneTabelaEncontroController implements Initializable {
             labelXPNivel.setText(String.valueOf(xpPorNivel.get(difNivel)));
             labelCriaturaMaxima.setText(String.valueOf(criaturaMax));
             labelCriaturaRestante.setText(String.valueOf(criaturaMax - listCriaturaPorNivel.size()));                    
-            labelGasto.setText(String.valueOf(xpGasto));
-            
+            labelGasto.setText(String.valueOf(xpGasto));    
         }
  
     }
     
-    @FXML
-    public void carregarCriador() {
-        listCriaturaPorNivel.clear();
-        int nivelGrupoEncontro = spinnerNivelCriatura.getValue();         
-        int xp = Integer.valueOf(labelSaldoXP.getText()) - xpGasto;
-        int difNivel = indiceNivelAtual - nivelGrupoEncontro;
-            if ((nivelGrupoEncontro + difNivel) < -1) {
-                difNivel = -1 * (nivelGrupoEncontro - 4) - 5;
-                
-            }    
-            int criaturaMax =  (xp) / xpPorNivel.get(difNivel);
-            labelRestante.setText(String.valueOf(xp));
-            
-            labelNivel.setText(String.valueOf(indiceNivelAtual));
-            labelXPNivel.setText(String.valueOf(xpPorNivel.get(difNivel)));
-            labelCriaturaMaxima.setText(String.valueOf(criaturaMax));
-            labelCriaturaRestante.setText(String.valueOf(criaturaMax - listCriaturaPorNivel.size()));                    
-            labelGasto.setText(String.valueOf(xpGasto));
-        
-    }
     
+    @FXML
+    public void carregarCriadorDesignEncontro(int difNivel, int xp) {
+        int tamanhoListaCriatura = listCriaturaPorNivel.size();
+        int criaturaMax = xp / xpPorNivel.get(difNivel);
+        labelNivel.setText(String.valueOf(indiceNivelAtual));
+        labelXPNivel.setText(String.valueOf(xpPorNivel.get(difNivel)));
+        labelCriaturaMaxima.setText(String.valueOf(criaturaMax));
+        labelCriaturaRestante.setText(String.valueOf(criaturaMax - tamanhoListaCriatura));                            
+        labelGasto.setText(String.valueOf(xpGasto));
+        labelRestante.setText(String.valueOf(xp - xpGasto)); 
+    }
 
     public void carregarChoiceBoxCriaturasPorNivel() {
         observableListCriaturaEncontro = FXCollections.observableArrayList(listCriaturaEncontro);
@@ -206,7 +210,7 @@ public class FXMLAnchorPaneTabelaEncontroController implements Initializable {
         observableListAmeacaEncontro = FXCollections.observableArrayList(listAmeacaEncontro);
         choiceBoxAmeacaEncontro.setItems(observableListAmeacaEncontro);
         choiceBoxAmeacaEncontro.setValue(Ameaca.Moderada);
-        choiceBoxAmeacaEncontro.setOnAction(event -> carregarCriadorDesignEncontro());
+        //choiceBoxAmeacaEncontro.setOnAction(event -> carregarCriadorDesignEncontro());
     }
     public SpinnerValueFactory<Integer> carregarSpinnerEncontro(int a, int b, int c) {
         SpinnerValueFactory<Integer> valueFactoryNivelEncontro = new SpinnerValueFactory.IntegerSpinnerValueFactory(a, b);
@@ -225,7 +229,7 @@ public class FXMLAnchorPaneTabelaEncontroController implements Initializable {
                     listCriaturaPorNivel.add(c1);
                     listCriaturaEncontro.add(c1);
                     carregarChoiceBoxCriaturasPorNivel();
-                    carregarCriador();
+                    //carregarCriador();
             }     
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -244,7 +248,7 @@ public class FXMLAnchorPaneTabelaEncontroController implements Initializable {
             int dif = c1.getNivel_criatura() - spinnerNivelCriatura.getValue();
             xpGasto -= xpPorNivel.get(dif) * criaturaQuantidade.get(c1);
             carregarChoiceBoxCriaturasPorNivel();
-            carregarCriador();
+            //carregarCriador();
         }
     }
     
@@ -269,8 +273,8 @@ public class FXMLAnchorPaneTabelaEncontroController implements Initializable {
             } 
             for (Criatura criatura :listCriaturaEncontro) {
                 Criatura_Encontro ce = new Criatura_Encontro();
-                ce.setCd_criatura_CE(criatura.getCd_criatura());
-                ce.setCd_encontro_CE(encontro.getCd_encontro());
+                ce.setCriatura_CE(criatura);
+                ce.setEncontro_CE(encontro);
                 ce.setQuant(criaturaQuantidade.get(criatura));
                 criatura_encontroDAO.inserir(ce);
             }

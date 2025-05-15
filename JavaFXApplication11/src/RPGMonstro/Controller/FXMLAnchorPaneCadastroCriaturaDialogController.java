@@ -47,10 +47,10 @@ public class FXMLAnchorPaneCadastroCriaturaDialogController implements Initializ
     private boolean botaoConfimarClicado = false;
     private Criatura criatura;
     
-    private List<Tamanho> listTamanho = new ArrayList();
+    private final List<Tamanho> listTamanho = new ArrayList();
     private ObservableList<Tamanho> observableListTamanho;
     
-    private List<Raridade> listRaridade = new ArrayList();
+    private final List<Raridade> listRaridade = new ArrayList();
     private ObservableList<Raridade> observableListRaridade;
    
   

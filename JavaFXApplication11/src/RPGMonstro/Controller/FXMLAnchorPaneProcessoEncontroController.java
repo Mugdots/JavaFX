@@ -16,8 +16,13 @@ import RPGMonstro.model.domain.Encontro;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -31,11 +36,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
-/**
- * FXML Controller class
- *
- * @author PC
- */
+
 public class FXMLAnchorPaneProcessoEncontroController implements Initializable {
 
     @FXML
@@ -46,43 +47,47 @@ public class FXMLAnchorPaneProcessoEncontroController implements Initializable {
     private TableColumn<Encontro, Integer> tableColumnTamanhoGrupo;
     @FXML
     private TableColumn<Encontro, String> tableColumnAmeacaEncontro;
+    
+    
     @FXML
-    private AnchorPane AnchorPaneLabelCriaturasNivel;
+    private TableView<Criatura_Encontro> tableViewCriatura;
     @FXML
-    private TableColumn<Criatura, String> tableColumnNomeCriatura;
+    private TableColumn<Criatura_Encontro, String> tableColumnNomeCriatura;
     @FXML
-    private TableColumn<Criatura, Integer> tableColumnNivelCriatura;
+    private TableColumn<Criatura_Encontro, Integer> tableColumnNivelCriatura;
     @FXML
-    private TableColumn<Criatura, String> tableColumnRaridadeCriatura;
+    private TableColumn<Criatura_Encontro, String> tableColumnRaridadeCriatura;
+    
     @FXML
     private Button buttonInserir;
     @FXML
     private Button buttonRemover;
     @FXML
     private Button buttonAlterar;
-    @FXML
-    private TableView<Criatura> tableViewCriatura;
-
+    
     private final Database database = DatabaseFactory.getDatabase("postgresql");
     private final Connection connection = database.conectar();
-    private final CriaturaDAO criaturaDAO = new CriaturaDAO();
     private final EncontroDAO encontroDAO = new EncontroDAO();
     private final Criatura_EncontroDAO criatura_encontroDAO = new Criatura_EncontroDAO();
-    private List<Criatura> listCriatura;
-    private ObservableList<Criatura> observableListCriatura;
+    
     private List<Encontro> listEncontro;
     private ObservableList<Encontro> observableListEncontro;
+    
+    private List<Criatura_Encontro> listCE;
+    private ObservableList<Criatura_Encontro> observableListCE;
+    
+    
     @FXML
     private AnchorPane anchorPane;
+    @FXML
+    private TableColumn<Criatura_Encontro, Integer> tableColumnQuantidadeCriatura;
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        criaturaDAO.setConnection (connection);
         encontroDAO.setConnection(connection);
         criatura_encontroDAO.setConnection(connection);
         carregarTableViewEncontro();
-        //selecionarItemTableViewEncontro(null);
         
         tableViewEncontro.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> selecionarItemTableViewEncontro(newValue));
@@ -97,21 +102,33 @@ public class FXMLAnchorPaneProcessoEncontroController implements Initializable {
     }
 
     @FXML
-    private void handleButtonRemover(ActionEvent event) {
-        Encontro e1 = tableViewEncontro.getSelectionModel().getSelectedItem();
-        if (e1 != null) {
-            List<Criatura_Encontro> listCriatura_Encontro = criatura_encontroDAO.listar();
-            for (Criatura_Encontro ce : listCriatura_Encontro) {
-                criatura_encontroDAO.remover(ce);
-            }
-            
-            encontroDAO.remover(e1);
-            carregarTableViewEncontro();
-        } else {
+    private void handleButtonRemover() throws IOException {
+        try {
+            connection.setAutoCommit(false);
+            Encontro e1 = tableViewEncontro.getSelectionModel().getSelectedItem();
+            System.out.println(e1.getCd_encontro());
+            if (e1 != null) {
+                List<Criatura_Encontro> listCriatura_Encontro = criatura_encontroDAO.listar(e1);
+                listCriatura_Encontro.forEach((ce) -> {
+                    criatura_encontroDAO.remover(ce);
+                });
+                encontroDAO.remover(e1);
+                connection.commit();                
+                carregarTableViewEncontro();
+            } else {
                 Alert al = new Alert(Alert.AlertType.ERROR);
                 al.setContentText("Por favor, escolha uma criatura na Tabela");
                 al.show();
-        }
+                connection.rollback();
+            }
+        } catch (SQLException ex) {
+                try {
+                    connection.rollback();
+                } catch (SQLException ex1) {
+                    Logger.getLogger(FXMLAnchorPaneTabelaEncontroController.class.getName()).log(Level.SEVERE, null, ex1);
+                }
+                Logger.getLogger(FXMLAnchorPaneTabelaEncontroController.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
 
     @FXML
@@ -130,18 +147,36 @@ public class FXMLAnchorPaneProcessoEncontroController implements Initializable {
     }
     
      private void carregarTableViewCriatura(Encontro encontro) {
-        tableColumnNomeCriatura.setCellValueFactory(new PropertyValueFactory<>("nome_criatura"));
-        tableColumnRaridadeCriatura.setCellValueFactory(new PropertyValueFactory<>("raridade_criatura"));
-        tableColumnNivelCriatura.setCellValueFactory(new PropertyValueFactory<>("nivel_criatura"));
+        tableColumnNomeCriatura.setCellValueFactory(cellData -> {
+            Criatura criatura = cellData.getValue().getCriatura_CE();
+            String nome = (criatura != null) ? criatura.getNome_criatura(): "";
+            return new SimpleStringProperty(nome);
+        });
         
-        listCriatura = criaturaDAO.ListarCriaturaPorEncontro(encontro);
-        observableListCriatura = FXCollections.observableArrayList(listCriatura);
-        tableViewCriatura.setItems(observableListCriatura);    
+        tableColumnRaridadeCriatura.setCellValueFactory(cellData -> {
+            Criatura criatura = cellData.getValue().getCriatura_CE();
+            String raridade = (criatura != null) ? criatura.getRaridade_criatura(): "";
+            return new SimpleStringProperty(raridade);
+        });
+        
+        tableColumnNivelCriatura.setCellValueFactory(cellData -> {
+            Criatura criatura = cellData.getValue().getCriatura_CE();
+            Integer nivel = (criatura != null) ? criatura.getNivel_criatura(): 0;
+            return new SimpleIntegerProperty(nivel).asObject();
+        });
+        tableColumnQuantidadeCriatura.setCellValueFactory(new PropertyValueFactory<>("quant"));
+        
+        listCE = criatura_encontroDAO.listar(encontro);
+        observableListCE = FXCollections.observableArrayList(listCE);
+        tableViewCriatura.setItems(observableListCE);    
     }
 
     private void selecionarItemTableViewEncontro(Encontro encontro) {
-        carregarTableViewCriatura(encontro);
-        
+        if (encontro != null) {
+            carregarTableViewCriatura(encontro);
+        } else {
+            tableViewCriatura.getItems().clear();
+        }
     }
     
 }

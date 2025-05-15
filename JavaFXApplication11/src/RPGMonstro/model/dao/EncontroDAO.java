@@ -122,17 +122,19 @@ public class EncontroDAO {
             
     
     public Encontro buscar(Encontro encontro) {
-        String sql = "SELECT * FROM encontro WHERE cd_criatura=?";
+        String sql = "SELECT * FROM encontro WHERE cd_encontro=?";
         Encontro retorno = new Encontro();
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, encontro.getCd_encontro());
             ResultSet resultado = stmt.executeQuery();
             if (resultado.next()) {
-                encontro.setCd_encontro(resultado.getInt("cd_criatura"));
+                encontro.setCd_encontro(resultado.getInt("cd_encontro"));
                 encontro.setNivel_grupo_encontro(resultado.getInt("nivel_grupo_encontro"));
                 encontro.setTamanho_grupo_encontro(resultado.getInt("tamanho_grupo_encontro"));
                 encontro.setSaldo_XP_encontro(resultado.getInt("saldo_xp_encontro"));
-                encontro.setAmeaca_encontro(resultado.getString("dificuldade_encontro"));
+                encontro.setGasto_XP_encontro(resultado.getInt("gasto_xp_encontro"));
+                encontro.setAmeaca_encontro(resultado.getString("ameaca_encontro"));
                 retorno = encontro;
             }
         } catch (SQLException ex) {
